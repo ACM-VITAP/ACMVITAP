@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Edit Event</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+            background: #f5f7fb;
+            color: #0f172a;
+            margin: 0;
+            padding: 28px;
+        }
+
+        .wrap {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin: 0;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        form.card {
+            background: #fff;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #e6eefc;
+            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type=text],
+        input[type=number] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: 1px solid #e6eefc;
+            font-size: 15px;
+        }
+
+        .switch {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 10px;
+        }
+
+        .actions {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn.secondary {
+            background: #f3f4f6;
+            color: #0f172a;
+            border: 1px solid #e6eefc;
+        }
+
+        .flash {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .flash.success {
+            background: #e7f9ee;
+            color: #0b6b3b;
+            border: 1px solid #c7eed0;
+        }
+
+        .flash.error {
+            background: #fff1f1;
+            color: #8b1a1a;
+            border: 1px solid #f3c6c6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Edit Event</h1>
+            <a class="btn" href="{{ url_for('admin_events') }}">Back</a>
+        </header>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for cat, msg in messages %}
+        <div class="flash {{ 'success' if cat=='success' else 'error' }}">{{ msg }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form class="card" method="POST" action="{{ url_for('admin_edit_event', event_id=event._id) }}">
+            <h2 style="margin-top:0">{{ event.event_name }}</h2>
+
+            <!-- Event Name -->
+            <label for="event_name">Event Name</label>
+            <input id="event_name" name="event_name" type="text" required value="{{ event.event_name }}">
+
+            <!-- Require Team Name -->
+            <div class="switch">
+                <input id="require_team_name" name="require_team_name" type="checkbox" {% if event.require_team_name %}
+                    checked {% endif %}>
+                <label for="require_team_name" style="margin:0;font-weight:600">Require team name?</label>
+            </div>
+
+            <!-- Members -->
+            <label for="min_members">Minimum Members</label>
+            <input id="min_members" name="min_members" type="number" min="1" value="{{ event.min_members }}" required>
+
+            <label for="max_members">Maximum Members</label>
+            <input id="max_members" name="max_members" type="number" min="0" value="{{ event.max_members }}" required>
+
+            <div class="hint">
+                Tip: For single-attendee events set min_members=1 and uncheck "Require team name".
+            </div>
+
+            <!-- Buttons -->
+            <div class="actions">
+                <button type="submit" class="btn">Save Changes</button>
+                <a href="{{ url_for('admin_events') }}" class="btn secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
