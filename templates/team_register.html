@@ -1,380 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Registration</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Register — {{ event.event_name if event else 'Event' }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables - Design Tokens */
         :root {
             --primary: #0066ff;
             --primary-hover: #0052cc;
-            --background: #ffffff;
-            --background-alt: #f8f9fb;
-            --text-primary: #1a202c;
-            --text-secondary: #4a5568;
-            --text-muted: #718096;
-            --border: #e2e8f0;
-            --border-focus: #0066ff;
-            --success: #10b981;
-            --success-hover: #059669;
-            --radius: 8px;
-            --radius-lg: 12px;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
-            --spacing: 1rem;
+            --bg: #f6f8fb;
+            --card: #fff;
+            --muted: #64748b;
+            --radius: 10px;
         }
 
-        /* General Styles */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-                sans-serif;
-            background: linear-gradient(135deg, var(--background-alt) 0%, #f0f4f8 100%);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: var(--spacing);
+            font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+            background: var(--bg);
+            color: #0f172a;
+            margin: 0;
+            padding: 20px
         }
 
-        /* Header Section */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Form Container */
-        .form-container {
+        .wrap {
             max-width: 900px;
-            margin: 0 auto;
-            background: var(--background);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
+            margin: 20px auto
         }
 
-        .form-content {
-            padding: 3rem;
+        .card {
+            background: var(--card);
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #e8eef8;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04)
         }
 
-        /* Section Headers */
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-top: 2.5rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        h1 {
+            margin: 0 0 6px;
+            font-size: 20px
         }
 
-        .section-title:first-child {
-            margin-top: 0;
+        .muted {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 12px
         }
 
-        .section-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
+        .error {
+            background: #fff1f0;
+            color: #7f1d1d;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 12px
         }
 
-        /* Form Grid */
-        form {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Labels */
         label {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .required {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* Input Fields */
-        input[type="text"],
-        input[type="email"],
-        input[type="number"] {
-            padding: 0.875rem 1rem;
-            font-size: 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius);
-            background: var(--background);
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-            font-family: inherit;
-        }
-
-        input[type="text"]::placeholder,
-        input[type="email"]::placeholder,
-        input[type="number"]::placeholder {
-            color: var(--text-muted);
-        }
-
-        input[type="text"]:hover,
-        input[type="email"]:hover,
-        input[type="number"]:hover {
-            border-color: var(--text-muted);
-            background: var(--background-alt);
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="number"]:focus {
-            outline: none;
-            border-color: var(--border-focus);
-            background: var(--background);
-            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
-        }
-
-        /* Submit Button */
-        button[type="submit"] {
-            padding: 1rem 2rem;
-            font-size: 1rem;
+            display: block;
+            margin-top: 12px;
             font-weight: 600;
+            font-size: 14px
+        }
+
+        input[type=text],
+        input[type=email],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: 1px solid #e6eefc;
+            background: #fff
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px
+        }
+
+        .members {
+            margin-top: 16px
+        }
+
+        .member {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px dashed #eef4ff;
+            background: #fbfdff;
+            margin-bottom: 12px;
+            transition: all .18s
+        }
+
+        .member.hidden {
+            display: none;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            border: none
+        }
+
+        small.required {
+            color: var(--primary);
+            margin-left: 6px;
+            font-weight: 800
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 14px
+        }
+
+        .btn {
             background: var(--primary);
-            color: white;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
             border: none;
-            border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.2s ease;
-            align-self: flex-start;
-            margin-top: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+            font-weight: 700
         }
 
-        button[type="submit"]:hover {
-            background: var(--primary-hover);
-            box-shadow: 0 6px 16px rgba(0, 102, 255, 0.4);
-            transform: translateY(-2px);
+        .btn.ghost {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid rgba(0, 102, 255, 0.08)
         }
 
-        button[type="submit"]:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 102, 255, 0.3);
+        .hint {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 8px
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .form-content {
-                padding: 1.5rem;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 1.1rem;
-                margin-top: 1.5rem;
-                margin-bottom: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 0.5rem;
-            }
-
-            .header {
-                margin-bottom: 2rem;
-            }
-
-            .header h1 {
-                font-size: 1.75rem;
-            }
-
-            .header p {
-                font-size: 1rem;
-            }
-
-            .form-content {
-                padding: 1rem;
-            }
-
-            .form-grid {
-                gap: 1rem;
-            }
-
-            button[type="submit"] {
-                width: 100%;
-                align-self: stretch;
+        @media(max-width:560px) {
+            .row {
+                grid-template-columns: 1fr
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="header">
-        <h1>Team Registration</h1>
-        <p>Register your team for the competition. Fill in the required information below.</p>
-    </div>
+    <div class="wrap">
+        <div class="card" role="main">
+            <h1>Register for: <span style="color:#0b1286">{{ event.event_name if event else 'Event' }}</span></h1>
+            <div class="muted">This form adapts to event requirements. Fields with <small class="required">*</small> are
+                required.</div>
 
-    <div class="form-container">
-        <div class="form-content">
-            <form method="POST">
-                <!-- Team Information -->
-                <div>
-                    <div class="section-title">
-                        <div class="section-icon">1</div>
-                        Team Information
+            {% if error %}
+            <div class="error" role="alert">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" id="registrationForm" action="{{ url_for('team_register', event_id=event._id) }}">
+                <!-- Team name (conditional) -->
+                {% if event.require_team_name %}
+                <label for="team_name">Team Name <small class="required">*</small></label>
+                <input id="team_name" name="team_name" type="text" required
+                    value="{{ form.get('team_name','') if form is defined else '' }}"
+                    placeholder="Team name (e.g. ByteMasters)">
+                {% endif %}
+
+                <!-- Team lead info -->
+                <div class="row" style="margin-top:6px">
+                    <div>
+                        <label for="team_lead_name">Team Lead Name <small class="required">*</small></label>
+                        <input id="team_lead_name" name="team_lead_name" type="text" required
+                            value="{{ form.get('team_lead_name','') if form is defined else '' }}"
+                            placeholder="Full name">
                     </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="team_name">Team Name <span class="required">*</span></label>
-                            <input type="text" id="team_name" name="team_name" placeholder="Enter your team name" required>
-                        </div>
+
+                    <div>
+                        <label for="team_lead_email">Team Lead Email <small class="required">*</small></label>
+                        <input id="team_lead_email" name="team_lead_email" type="email" required
+                            value="{{ form.get('team_lead_email','') if form is defined else '' }}"
+                            placeholder="email@example.com">
                     </div>
                 </div>
 
-                <!-- Team Lead -->
-                <div>
-                    <div class="section-title">
-                        <div class="section-icon">2</div>
-                        Team Lead
+                <div class="row">
+                    <div>
+                        <label for="team_lead_phone">Team Lead Phone</label>
+                        <input id="team_lead_phone" name="team_lead_phone" type="text"
+                            value="{{ form.get('team_lead_phone','') if form is defined else '' }}"
+                            placeholder="+91XXXXXXXXXX">
                     </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="team_lead_name">Name <span class="required">*</span></label>
-                            <input type="text" id="team_lead_name" name="team_lead_name" placeholder="Full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="team_lead_email">Email <span class="required">*</span></label>
-                            <input type="email" id="team_lead_email" name="team_lead_email" placeholder="your.email@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="team_lead_phone">Phone Number <span class="required">*</span></label>
-                            <input type="text" id="team_lead_phone" name="team_lead_phone" placeholder="(123) 456-7890" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="team_lead_reg_no">Registration Number <span class="required">*</span></label>
-                            <input type="text" id="team_lead_reg_no" name="team_lead_reg_no" placeholder="REG-001234" required>
-                        </div>
+
+                    <div>
+                        <label for="team_lead_reg_no">Team Lead Reg No</label>
+                        <input id="team_lead_reg_no" name="team_lead_reg_no" type="text"
+                            value="{{ form.get('team_lead_reg_no','') if form is defined else '' }}"
+                            placeholder="REG-001234">
                     </div>
                 </div>
 
-                <!-- Members -->
-                <div>
-                    <div class="section-title">
-                        <div class="section-icon">3</div>
-                        Team Members (Optional)
-                    </div>
-                    
-                    <!-- Member 1 -->
-                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--background-alt); border-radius: var(--radius); border-left: 4px solid var(--primary);">
-                        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Member 1</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="member_1_name">Name</label>
-                                <input type="text" id="member_1_name" name="member_1_name" placeholder="Full name">
-                            </div>
-                            <div class="form-group">
-                                <label for="member_1_email">Email</label>
-                                <input type="email" id="member_1_email" name="member_1_email" placeholder="email@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="member_1_reg_no">Registration Number</label>
-                                <input type="text" id="member_1_reg_no" name="member_1_reg_no" placeholder="REG-001234">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Member 2 -->
-                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--background-alt); border-radius: var(--radius); border-left: 4px solid var(--primary);">
-                        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Member 2</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="member_2_name">Name</label>
-                                <input type="text" id="member_2_name" name="member_2_name" placeholder="Full name">
-                            </div>
-                            <div class="form-group">
-                                <label for="member_2_email">Email</label>
-                                <input type="email" id="member_2_email" name="member_2_email" placeholder="email@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="member_2_reg_no">Registration Number</label>
-                                <input type="text" id="member_2_reg_no" name="member_2_reg_no" placeholder="REG-001234">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Member 3 -->
-                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--background-alt); border-radius: var(--radius); border-left: 4px solid var(--primary);">
-                        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Member 3</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="member_3_name">Name</label>
-                                <input type="text" id="member_3_name" name="member_3_name" placeholder="Full name">
-                            </div>
-                            <div class="form-group">
-                                <label for="member_3_email">Email</label>
-                                <input type="email" id="member_3_email" name="member_3_email" placeholder="email@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="member_3_reg_no">Registration Number</label>
-                                <input type="text" id="member_3_reg_no" name="member_3_reg_no" placeholder="REG-001234">
-                            </div>
-                        </div>
-                    </div>
+                <!-- Member count selector (if more than 1 possible) -->
+                <div style="margin-top:14px">
+                    <label for="member_count">Number of members</label>
+                    <select id="member_count" name="member_count" aria-label="Number of members">
+                        {% set min_m = event.min_members | int %}
+                        {% set max_m = event.max_members | int %}
+                        {% for n in range(min_m, max_m + 1) %}
+                        {% set sel = '' %}
+                        {% if form is defined and form.get('member_count') %}
+                        {% if form.get('member_count')|int == n %}{% set sel = 'selected' %}{% endif %}
+                        {% else %}
+                        {% if n == min_m %}{% set sel = 'selected' %}{% endif %}
+                        {% endif %}
+                        <option value="{{ n }}" {{ sel }}>{{ n }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="hint">Choose how many members you'll register (includes team lead if applicable).</div>
                 </div>
 
-                <button type="submit">Submit Registration</button>
-            </form>
+                <!-- Members container -->
+                <div class="members" id="membersContainer" aria-live="polite">
+                    <h3 style="margin-top:18px;margin-bottom:8px">Member details</h3>
+                    <div class="muted">Provide name and email for each member. {{ "Minimum required: " ~
+                        event.min_members ~ ", Maximum allowed: " ~ event.max_members }}.</div>
+
+                    {% for i in range(1, event.max_members + 1) %}
+                    {% set required = (i <= event.min_members) %} <div class="member" id="memberBlock{{ i }}"
+                        data-index="{{ i }}">
+                        <strong>Member {{ i }} {% if required %}<small class="required">*</small>{% endif %}</strong>
+
+                        <div style="margin-top:8px">
+                            <label for="member_{{ i }}_name">Name {% if required %}<small class="required">*</small>{%
+                                endif %}</label>
+                            <input id="member_{{ i }}_name" name="member_{{ i }}_name" type="text" {% if required %}
+                                required {% endif %}
+                                value="{{ form.get('member_' ~ i ~ '_name','') if form is defined else '' }}">
+                        </div>
+
+                        <div style="margin-top:8px">
+                            <label for="member_{{ i }}_email">Email {% if required %}<small class="required">*</small>{%
+                                endif %}</label>
+                            <input id="member_{{ i }}_email" name="member_{{ i }}_email" type="email" {% if required %}
+                                required {% endif %}
+                                value="{{ form.get('member_' ~ i ~ '_email','') if form is defined else '' }}">
+                        </div>
+
+                        <div style="margin-top:8px">
+                            <label for="member_{{ i }}_reg_no">Registration No</label>
+                            <input id="member_{{ i }}_reg_no" name="member_{{ i }}_reg_no" type="text"
+                                value="{{ form.get('member_' ~ i ~ '_reg_no','') if form is defined else '' }}">
+                        </div>
+                </div>
+                {% endfor %}
         </div>
+
+        <div class="actions">
+            <button type="submit" class="btn">Submit Registration</button>
+            <a class="btn ghost" href="{{ url_for('choose_event') }}" style="text-decoration:none">Choose another
+                event</a>
+        </div>
+        </form>
     </div>
+    </div>
+
+    <script>
+        (function () {
+            // Read min/max from template (safe defaults)
+            const minMembers = {{ event.min_members | int
+        }};
+        const maxMembers = {{ event.max_members | int }};
+        const memberSelect = document.getElementById('member_count');
+        const membersContainer = document.getElementById('membersContainer');
+
+        // utility: show/hide blocks
+        function showMembers(count) {
+            for (let i = 1; i <= maxMembers; i++) {
+                const block = document.getElementById('memberBlock' + i);
+                const nameInput = document.getElementById('member_' + i + '_name');
+                const emailInput = document.getElementById('member_' + i + '_email');
+                if (!block) continue;
+                if (i <= count) {
+                    block.classList.remove('hidden');
+                    // set required for those <= minMembers
+                    if (i <= minMembers) {
+                        nameInput.required = true;
+                        emailInput.required = true;
+                    } else {
+                        // if event requires min members only some are required
+                        nameInput.required = false;
+                        emailInput.required = false;
+                    }
+                } else {
+                    // hide and clear optional fields that were not required
+                    block.classList.add('hidden');
+                    // don't remove values (so user won't lose typed data) — comment next lines if you want to clear
+                    // nameInput.value = '';
+                    // emailInput.value = '';
+                    nameInput.required = false;
+                    emailInput.required = false;
+                }
+            }
+        }
+
+        // initialize according to selected value or defaults
+        const initial = (function () {
+            const f = document.querySelector('#member_count');
+            return f ? parseInt(f.value, 10) : minMembers;
+        })();
+        showMembers(initial);
+
+        // update on change
+        memberSelect.addEventListener('change', function (e) {
+            const v = parseInt(e.target.value, 10) || minMembers;
+            showMembers(v);
+        });
+
+        // small UX: set focus to first required field on load (if empty)
+        window.addEventListener('load', function () {
+            const lead = document.getElementById('team_lead_name');
+            if (lead && !lead.value) lead.focus();
+        });
+    }) ();
+    </script>
 </body>
+
 </html>
