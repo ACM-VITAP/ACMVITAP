@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <title>EVENT - ACM VIT-AP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* General Reset */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Global Styling */
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #076ddb;
+        }
+
+        p {
+            color: #555;
+        }
+
+        /* Header Styling */
+
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-right: 20px;
+        }
+
+        header p {
+            font-size: 14px;
+            color: #76a9e0;
+            margin-top: 5px;
+        }
+
+        header a {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        header a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Main Content Area */
+
+        .main-content {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        /* About ACM Section */
+
+        .about-acm {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .about-acm h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .about-acm p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Upcoming Events Section */
+
+        .events-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .event-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .event-item h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .event-item p {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .register-button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .register-button:hover {
+            background-color: #218838;
+        }
+
+        /* Footer Styling */
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Advanced Social Media Section */
+
+        .social-media-section {
+            color: black;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .social-media-section h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: black;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 50px;
+            color: black;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #076ddb;
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+            background-color: transparent;
+        }
+
+        .social-links a:hover {
+            background-color: #076ddb;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .social-links a i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-links a {
+                width: 130px;
+                height: 45px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-links a {
+                width: 120px;
+                height: 40px;
+                font-size: 14px;
+            }
+
+            .social-media-section h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div>
+            <h1>ACM VIT-AP</h1>
+            <p>Association for Computing Machinery - VIT Amaravati Chapter</p>
+        </div>
+        <a href="{{ url_for('admin_login') }}" class="admin-button">Admin Access</a>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+
+        <!-- About ACM Section -->
+        <section class="about-acm">
+            <h2>About ACM VIT-AP</h2>
+            <p>The Association for Computing Machinery (ACM) is the world's largest scientific and educational computing
+                society. At VIT Amaravati, ACM strives to advance computing as a science and profession by organizing
+                various events, workshops, and
+                hackathons. Our goal is to inspire young minds and nurture their computing skills for future innovation.
+            </p>
+        </section>
+
+        <!-- Upcoming Events Section -->
+        <section class="events-section">
+            <div class="event-item">
+                <h3>HACKATHON WORKSHOP</h3>
+                <p>A hackathon workshop for students introduces the event format, covers structure (team formation,
+                    hacking, demos), teaches skills like coding/teamwork/pitching, and runs a mini-challenge for
+                    hands-on practice</p>
+                <a href="{{ url_for('team_register') }}">
+                    <button class="register-button">Register Now</button>
+                </a>
+            </div>
+            <div class="event-item">
+                <h3>SIMVERSE</h3>
+                <p>is a 24-hour
+                    innovation challenge focused on building and testing simulation-based experiments.
+                    Participants will design creative simulation environments, develop small-scale experimental
+                    setups, and validate their ideas through real-time testing.</p>
+                <a href="{{ url_for('treasure') }}">
+                    <button class="register-button">Coming Soon</button>
+                </a>
+            </div>
+            <div class="event-item">
+                <h3>BOOTCAMP</h3>
+                <p>Don't miss our upcoming Boot Camp, where experts will teach courses that are important to you.</p>
+                <button onclick="alert('Coming soon')" class="register-button">Coming Soon</button>
+            </div>
+            <!-- New Event Tile 2 -->
+            <div class="event-item">
+                <h3>WEB-A-THON</h3>
+                <p>Learn the essentials of protecting digital assets in our beginner-friendly Cyber Security workshop
+                    led by top professionals.</p>
+                <button onclick="alert('Registrations will open soon!')" class="register-button">Coming Soon</button>
+            </div>
+        </section>
+
+
+    </div>
+
+    <!-- Social Media Section -->
+    <div class="social-media-section">
+        <h2>Follow Us on Social Media</h2>
+        <div class="social-links">
+            <a href="https://www.instagram.com/acm_vitap?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==/"
+                target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.linkedin.com/company/acm-student-chapter-vit-ap/" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p style="color: white;">&copy; 2024 ACM VIT-AP. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

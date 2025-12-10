@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Registration</title>
+    <style>
+        /* CSS Variables - Design Tokens */
+        :root {
+            --primary: #0066ff;
+            --primary-hover: #0052cc;
+            --background: #ffffff;
+            --background-alt: #f8f9fb;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+            --border-focus: #0066ff;
+            --success: #10b981;
+            --success-hover: #059669;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --spacing: 1rem;
+        }
+
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            background: linear-gradient(135deg, var(--background-alt) 0%, #f0f4f8 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: var(--spacing);
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--background);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .form-content {
+            padding: 3rem;
+        }
+
+        /* Section Headers */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Form Grid */
+        form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Labels */
+        label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .required {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Input Fields */
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        input[type="number"]::placeholder {
+            color: var(--text-muted);
+        }
+
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        input[type="number"]:hover {
+            border-color: var(--text-muted);
+            background: var(--background-alt);
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            background: var(--background);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+
+        /* Submit Button */
+        button[type="submit"] {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            align-self: flex-start;
+            margin-top: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+        }
+
+        button[type="submit"]:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 6px 16px rgba(0, 102, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 102, 255, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .form-content {
+                padding: 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+                margin-top: 1.5rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .header {
+                margin-bottom: 2rem;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .form-content {
+                padding: 1rem;
+            }
+
+            .form-grid {
+                gap: 1rem;
+            }
+
+            button[type="submit"] {
+                width: 100%;
+                align-self: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Team Registration</h1>
+        <p>Register your team for the competition. Fill in the required information below.</p>
+    </div>
+
+    <div class="form-container">
+        <div class="form-content">
+            <form method="POST">
+                <!-- Team Information -->
+                <div>
+                    <div class="section-title">
+                        <div class="section-icon">1</div>
+                        Team Information
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="team_name">Team Name <span class="required">*</span></label>
+                            <input type="text" id="team_name" name="team_name" placeholder="Enter your team name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Lead -->
+                <div>
+                    <div class="section-title">
+                        <div class="section-icon">2</div>
+                        Team Lead
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="team_lead_name">Name <span class="required">*</span></label>
+                            <input type="text" id="team_lead_name" name="team_lead_name" placeholder="Full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="team_lead_email">Email <span class="required">*</span></label>
+                            <input type="email" id="team_lead_email" name="team_lead_email" placeholder="your.email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="team_lead_phone">Phone Number <span class="required">*</span></label>
+                            <input type="text" id="team_lead_phone" name="team_lead_phone" placeholder="(123) 456-7890" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="team_lead_reg_no">Registration Number <span class="required">*</span></label>
+                            <input type="text" id="team_lead_reg_no" name="team_lead_reg_no" placeholder="REG-001234" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Members -->
+                <div>
+                    <div class="section-title">
+                        <div class="section-icon">3</div>
+                        Team Members (Optional)
+                    </div>
+                    
+                    <!-- Member 1 -->
+                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--background-alt); border-radius: var(--radius); border-left: 4px solid var(--primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Member 1</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="member_1_name">Name</label>
+                                <input type="text" id="member_1_name" name="member_1_name" placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="member_1_email">Email</label>
+                                <input type="email" id="member_1_email" name="member_1_email" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="member_1_reg_no">Registration Number</label>
+                                <input type="text" id="member_1_reg_no" name="member_1_reg_no" placeholder="REG-001234">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Member 2 -->
+                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--background-alt); border-radius: var(--radius); border-left: 4px solid var(--primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Member 2</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="member_2_name">Name</label>
+                                <input type="text" id="member_2_name" name="member_2_name" placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="member_2_email">Email</label>
+                                <input type="email" id="member_2_email" name="member_2_email" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="member_2_reg_no">Registration Number</label>
+                                <input type="text" id="member_2_reg_no" name="member_2_reg_no" placeholder="REG-001234">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Member 3 -->
+                    <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--background-alt); border-radius: var(--radius); border-left: 4px solid var(--primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">Member 3</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="member_3_name">Name</label>
+                                <input type="text" id="member_3_name" name="member_3_name" placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="member_3_email">Email</label>
+                                <input type="email" id="member_3_email" name="member_3_email" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="member_3_reg_no">Registration Number</label>
+                                <input type="text" id="member_3_reg_no" name="member_3_reg_no" placeholder="REG-001234">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit">Submit Registration</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events - ACM VIT-AP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            font-size: 14px;
+        }
+
+        .main-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .event-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .event-card h3 {
+            color: #007bff;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            .event-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>ACM VIT-AP</h1>
+        <p>Association for Computing Machinery - VIT Amaravati Chapter</p>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <h2>Upcoming Events</h2>
+
+        <!-- Event 1 -->
+        <div class="event-card">
+            <h3>WEB-A-THON</h3>
+            <p>A thrilling web development hackathon, where you can demonstrate your skills and create innovative projects. Join us!</p>
+            <a href="{{ url_for('team_register') }}">
+                <button class="register-button">Register Now</button>
+            </a>
+        </div>
+        
+        <!-- Add more events here -->
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 ACM VIT-AP. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Teams</title>
+    <style>
+        /* General page styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2em;
+            margin: 30px 0;
+            color: #4CAF50;
+        }
+
+        h3, h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .registration-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .team {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .team:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .team h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        .team p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 1em;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-size: 1.5em;
+        }
+
+        .team .member-details {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .registration-list {
+                padding: 15px;
+            }
+
+            .team {
+                padding: 15px;
+            }
+
+            .team h3 {
+                font-size: 1.3em;
+            }
+
+            .team p {
+                font-size: 1em;
+            }
+
+            ul li {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .registration-list {
+                padding: 10px;
+            }
+
+            .team {
+                padding: 10px;
+            }
+
+            .team h3 {
+                font-size: 1.1em;
+            }
+
+            .team p {
+                font-size: 0.9em;
+            }
+
+            ul li {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="registration-list">
+        <h2>Registered Teams</h2>
+        {% for team in teams %}
+            <div class="team">
+                <h3>Team: {{ team[1] }}</h3>  <!-- team_name -->
+                <p>Team Lead: {{ team[2] }}</p>  <!-- team_lead_name -->
+                <p>Email: {{ team[3] }}</p>  <!-- team_lead_email -->
+                <p>Phone: {{ team[4] }}</p>  <!-- team_lead_phone -->
+                <p>Team Lead Registration Number: {{ team[5] }}</p>  <!-- team_lead_reg_no -->
+
+                <h4>Members:</h4>
+                <ul>
+                    <li>Name: {{ team[6] }} | Email: {{ team[7] }} | Registration Number: {{ team[8] }}</li>  <!-- member1 -->
+                    <li>Name: {{ team[9] }} | Email: {{ team[10] }} | Registration Number: {{ team[11] }}</li>  <!-- member2 -->
+                    <li>Name: {{ team[12] }} | Email: {{ team[13] }} | Registration Number: {{ team[14] }}</li>  <!-- member3 -->
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

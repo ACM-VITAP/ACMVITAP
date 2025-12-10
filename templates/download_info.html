@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Your Information</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #343a40;
+        }
+
+        .info-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box p {
+            margin: 10px 0;
+            color: #495057;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .info-box {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Thank You for Registering!</h1>
+
+    <div class="info-box">
+        <h2>Your Registration Details</h2>
+        <p><strong>Team Name:</strong> {{ data['team_name'] }}</p>
+        <p><strong>Team Lead Name:</strong> {{ data['team_lead_name'] }}</p>
+        <p><strong>Team Lead Email:</strong> {{ data['mail_id'] }}</p>
+        <p><strong>Team Lead Phone Number:</strong> {{ data['phone_number'] }}</p>
+        <p><strong>Member 1 Name:</strong> {{ data['member1_name'] }}</p>
+        <p><strong>Member 1 Email:</strong> {{ data['member1_mail'] }}</p>
+        <p><strong>Member 2 Name:</strong> {{ data['member2_name'] }}</p>
+        <p><strong>Member 2 Email:</strong> {{ data['member2_mail'] }}</p>
+        <p><strong>Member 3 Name:</strong> {{ data['member3_name'] }}</p>
+        <p><strong>Member 3 Email:</strong> {{ data['member3_mail'] }}</p>
+    </div>
+
+    <form action="{{ url_for('download_info') }}" method="POST">
+        <button type="submit">Download Your Details</button>
+    </form>
+</body>
+</html>

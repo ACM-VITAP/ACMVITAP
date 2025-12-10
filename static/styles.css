@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+    table, th, td {
+        font-size: 12px;
+    }
+}
