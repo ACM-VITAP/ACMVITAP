@@ -360,6 +360,9 @@
         <h2>🎯 Admin</h2>
         <a href="#teams">📄 View Teams</a>
         <a href="{{ url_for('export_excel') }}">📥 Export Excel</a>
+        <!-- place this near other admin links/buttons -->
+        <a class="btn" href="{{ url_for('admin_events') }}">Manage Events</a>
+
         <a href="{{ url_for('logout') }}">🚪 Logout</a>
     </div>
 
