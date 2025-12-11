@@ -1,23 +1,36 @@
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Association_for_Computing_Machinery_%28ACM%29_logo.svg/512px-Association_for_Computing_Machinery_%28ACM%29_logo.svg.png" width="120" />
-</p>
-
-<h1 align="center">ACM Events Registration System</h1>
-
-<p align="center">
-  A fully dynamic, multi-event registration system with admin dashboard, MongoDB backend, 
-  and intelligent forms that adapt based on event configuration.
-</p>
-
-<p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/Flask-2.0+-blue.svg"></a>
-  <a href="#"><img src="https://img.shields.io/badge/MongoDB-Atlas-green.svg"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Status-Active-success.svg"></a>
-  <a href="#"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg"></a>
-</p>
+# 🎯 ACM Events Registration System  
+A dynamic event registration platform built using **Flask + MongoDB**, featuring a powerful admin dashboard, customizable event settings, and smart registration forms that automatically adapt based on event configuration.
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Features
 
-🔗 **Hosted on Render (Demo Link) — _Add yours here_**  
+### 🧑‍💼 Admin Panel
+- Create, edit, and delete events  
+- Enable/disable team name requirement  
+- Set **minimum and maximum members** (supports 0)  
+- View all registrations in a clean dashboard  
+- Export registrations to Excel  
+- Secure admin login with environment-based credentials  
+
+### 📝 Smart Event Registration
+- Users first choose an event  
+- Registration form **automatically changes** based on the event:
+  - If team name not required → hidden  
+  - Member fields shown based on min/max limit  
+  - Single attendee events fully supported  
+
+### 🗄️ Database
+- Stores events and registrations in MongoDB  
+- Uses timestamps and unique IDs  
+- Designed for scalability  
+
+### 🧾 Export Capabilities
+- Admin can download all registrations as an **Excel (.xlsx)** file  
+
+### 🌐 Deployment Ready  
+- Fully optimized for **Render**  
+- Uses environment variables instead of leaking secrets  
+- No SQLite — everything stored in MongoDB permanently  
+
+---
